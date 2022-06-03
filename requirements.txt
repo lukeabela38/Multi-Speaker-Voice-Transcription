@@ -1,0 +1,5 @@
+https://github.com/pyannote/pyannote-audio/archive/develop.zip
+librosa == 0.9.1
+SpeechRecognition == 3.8.1
+pydub == 0.25.1
+speechbrain == 0.5.11

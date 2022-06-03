@@ -1,0 +1,1 @@
+# Folder to contain wav files split according to who is speaking based on speaker diarization or based on length

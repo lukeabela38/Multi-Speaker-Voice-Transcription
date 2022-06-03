@@ -1,0 +1,4 @@
+src/inputs/test.wav
+src/inputs_processed/*.wav
+src/inputs_split/*.wav
+src/outputs/*.wav
