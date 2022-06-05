@@ -1,1 +1,0 @@
-# Output Folder - Collect Resultant Text Docs from here.

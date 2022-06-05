@@ -1,4 +1,5 @@
-src/inputs/test.wav
-src/inputs_processed/*.wav
-src/inputs_split/*.wav
-src/outputs/*.wav
+src/__pycache__
+src/inputs_processed
+src/inputs_split
+src/outputs_temp
+src/outputs

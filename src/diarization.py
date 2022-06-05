@@ -1,3 +1,4 @@
+import os
 import sys
 import wave
 import numpy as np
@@ -8,6 +9,7 @@ from pyannote.audio import Pipeline
 class Diarizer:
     def __init__(self):
         self.pipeline = Pipeline.from_pretrained("pyannote/speaker-diarization")
+        self.location = os.getcwd() + "/inputs_split/"
 
     def _diarize(self, input_file):
         diarization = self.pipeline(input_file)
@@ -18,18 +20,18 @@ class Diarizer:
             t1 = turn.start*1000
             t2 = turn.end*1000
             speakers.append([i, t1, t2, speaker]) # start time, end time, speaker
-            i += 0
+            i = i + 1
 
         return speakers
 
     def _segment(self, input_file, speakers):
         audio = AudioSegment.from_wav(input_file)
         for speaker in speakers:
-            name = str(speaker[0]) + "_" + str(speaker[3]) + ".wav"
-            print(name, speaker[1], speaker[2])
-            #audio[speaker[1]:speaker[2]].export(name, format="wav")
+            name = self.location + str(speaker[0]) + "_" + str(speaker[3]) + ".wav"
+            print(speaker)
+            audio[speaker[1]:speaker[2]].export(name, format="wav")
 
-    def _splitFiles(self, input_file):
+    def _segmentFiles(self, input_file):
         speakers = self._diarize(input_file=input_file)
         self._segment(input_file=input_file, speakers=speakers)
 
@@ -41,20 +43,21 @@ class Diarizer:
             points_to_plot.append(speaker[1])
             points_to_plot.append(speaker[2])
         points_to_plot = np.array(points_to_plot)
-        
+
         spf = wave.open(input_file, "r")
         signal = spf.readframes(-1)
         signal = np.fromstring(signal, dtype = "int16")
         y_min = np.min(signal)
         y_max = np.max(signal)
 
+        x = points_to_plot*8
         plt.figure(1)
         plt.title("Diarized Signal Wave")
         plt.plot(signal)
-        plt.vlines(x = points_to_plot, ymin=y_min, ymax=y_max, colors="r")
-        plt.savefig("Diarization_plot.png")
+        plt.vlines(x = x, ymin=y_min, ymax=y_max, colors="r")
+        plt.savefig("plots/Diarization_plot.png")
 
 
         
 if __name__ == "__main__":
-    Diarizer()._plotDiarizarion("inputs_processed/test.wav")
+    Diarizer()._segmentFiles("inputs_processed/test.wav")

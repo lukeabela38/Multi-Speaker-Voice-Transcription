@@ -3,7 +3,7 @@ import soundfile as sf
 
 class Processing:
     def __init__(self):
-        self.sr = 16000
+        self.sr = 8000
 
     def _load(self, input_file):
         y, sr = librosa.load(input_file)
@@ -12,7 +12,7 @@ class Processing:
     def _mono(self, y, sr):
         return librosa.to_mono(y), sr
     
-    def _resample(self, y, sr, target_sr = 16000):
+    def _resample(self, y, sr, target_sr = 8000):
         return librosa.resample(y, orig_sr = sr, target_sr = target_sr), target_sr
 
     def _save(self, y, sr, output_file):

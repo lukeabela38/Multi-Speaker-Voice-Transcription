@@ -1,1 +1,0 @@
-# Folder to hold processed wav files
