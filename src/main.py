@@ -14,6 +14,8 @@ from transcription import Transcription
 
 def main():
 
+    print("Here we go ...")
+
     folders = ["inputs_processed", "inputs_split", "plots", "outputs_temp"]
 
     for folder in folders:

@@ -1,0 +1,10 @@
+version: '3.3'
+services:
+    tvz:
+        build: .
+        command: python3 main.py
+        volumes:
+            - '$PWD/src/:/workspace'
+        ports:
+            - '8000:8000'
+        image: tvz
