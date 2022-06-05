@@ -24,8 +24,12 @@ class Transcription():
     
     def _listen(self, input_file):
         with sr.AudioFile(input_file) as source:
-            text = self.r.record(source)  
-        return self.r.recognize_google(text).capitalize()
+            try:
+                text = self.r.record(source)
+                text = self.r.recognize_google(text).capitalize()
+            except:
+                text = "..."  
+        return text
 
     def _large_listen(self, input_file):
 
