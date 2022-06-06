@@ -2,6 +2,8 @@
 
 Place your ```.wav``` file in the ```inputs``` folder and execute:
 
+```bash
+docker-compose up
 ```
-python3 main.py
-```
+
+Find the output in ```outputs/test.txt```
